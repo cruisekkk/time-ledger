@@ -32,7 +32,7 @@ time-ledger 把摩擦压到零:**你说人话,LLM 干脏活**(归类、估时长
 
 **前置**: 一个 Notion 账号 + Claude(Claude Code,或 Claude.ai 连了 Notion 连接器)。
 
-1. **建 Notion 库** — 照 [`notion-schema.md`](./notion-schema.md) 在 Notion 里新建一个 database,加好那 7 个字段(记录/活动/分钟/时间/状态/复利/备注)。
+1. **建 Notion 库** — 照 [`notion-schema.md`](./notion-schema.md) 在 Notion 里新建一个 database,加好那 7 个字段(Entry / Activity / Minutes / Date / Status / Compounding / Notes,均为英文)。
 2. **拿 `data_source_id`** — 见 `notion-schema.md` 末尾(让 Claude `fetch` 这个库,或从 URL 取)。
 3. **装 skill** — 把 [`SKILL.md`](./SKILL.md) 放到 `~/.claude/skills/time-ledger/SKILL.md`,**把里面 `<YOUR_NOTION_DATA_SOURCE_ID>` 那一行换成你第 2 步拿到的值**。
 4. **连 Notion** — 确保你的 Claude 连了 Notion(Claude Code: 加 Notion MCP 连接器;Claude.ai: Settings → Connectors → Notion)。

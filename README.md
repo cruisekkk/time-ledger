@@ -32,7 +32,7 @@ A **Claude skill** (a single `SKILL.md` of instructions) + your own **Notion dat
 
 **Prerequisites**: a Notion account + Claude (Claude Code, or Claude.ai with the Notion connector enabled).
 
-1. **Create the Notion database** — follow [`notion-schema.md`](./notion-schema.md): a new database with 7 properties (记录/活动/分钟/时间/状态/复利/备注). *(Rename to English fields if you prefer — see the schema note.)*
+1. **Create the Notion database** — follow [`notion-schema.md`](./notion-schema.md): a new database with 7 properties (Entry / Activity / Minutes / Date / Status / Compounding / Notes).
 2. **Get your `data_source_id`** — see the end of `notion-schema.md` (ask Claude to `fetch` the database, or read it from the URL).
 3. **Install the skill** — drop [`SKILL.md`](./SKILL.md) into `~/.claude/skills/time-ledger/SKILL.md`, and **replace `<YOUR_NOTION_DATA_SOURCE_ID>` with the value from step 2**.
 4. **Connect Notion** — make sure your Claude is connected to Notion (Claude Code: add the Notion MCP connector; Claude.ai: Settings → Connectors → Notion).
