@@ -6,6 +6,8 @@
 
 不是计时器,不是表格。是一面照"你的时间有没有在复利"的镜子。
 
+![time-ledger 演示 — 说一句话,它记好几条,拿不准就反问](./assets/demo.gif)
+
 ```
 你:   今天看了俩小时 ML system design,撸铁一小时,刷了道 leetcode
 AI:   记好 3 条 ✅

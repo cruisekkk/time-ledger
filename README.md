@@ -6,6 +6,8 @@
 
 Not a timer. Not a form. A mirror for whether your hours are actually compounding.
 
+![time-ledger demo — say one sentence, it logs the rows and asks when it's unsure](./assets/demo.gif)
+
 ```
 You:  read ML system design for two hours, gym for one, did a leetcode
 AI:   Logged 3 entries ✅
