@@ -36,11 +36,11 @@ AI:   记好 3 条 ✅
 <th width="50%">💬 网页 · Claude.ai</th>
 </tr>
 <tr>
-<td><img src="./assets/demo-terminal.gif" alt="终端演示:claude -p 记录时间" /></td>
-<td><img src="./assets/demo-web.gif" alt="claude.ai 网页演示:对话记录时间" /></td>
+<td width="50%"><img src="./assets/demo-terminal.gif" alt="终端演示:claude -p 记录时间" width="100%" /></td>
+<td width="50%"><img src="./assets/demo-web.gif" alt="claude.ai 网页演示:对话记录时间" width="100%" /></td>
 </tr>
 <tr>
-<td valign="top">
+<td width="50%" valign="top">
 
 把 skill 放进去:
 
@@ -59,7 +59,7 @@ claude -p "记一下:今天看了俩小时论文"
 *English → 把 `SKILL.md` 拷到同一个 `SKILL.md` 路径。*
 
 </td>
-<td valign="top">
+<td width="50%" valign="top">
 
 1. **Settings → Capabilities** → 打开 **Code execution and file creation**(*"Required for skills"*)。
 2. **[claude.ai/customize/skills](https://claude.ai/customize/skills)** → **+** → Create skill → **Write skill instructions** —— 把名字、描述、正文从 **[`SKILL.zh-CN.md`](./SKILL.zh-CN.md)** 拷进去。
@@ -70,7 +70,7 @@ claude -p "记一下:今天看了俩小时论文"
 </tr>
 </table>
 
-**两种都一样 —— 不用填 id。** skill 按标题找你的库(保留 `时间账本` / `time-ledger`、只授权这一个),读它的 id,写进去——拿不准就问,不瞎猜。
+**两种都一样 —— 不用填 id。** skill 按标题找你的库(保留 `时间账本` / `time-ledger`、只授权这一个),读它的 id,写进去——拿不准就问,不瞎猜。(在 Claude.ai 上第一次写入会弹 **approve** —— Notion 写工具默认 *Needs approval* —— 是正常的,不是卡住了。)
 
 > **改字段** —— 想换分类或语言?在库里改字段,然后把 skill 指令里的枚举同步成一样的(select 值必须对得上)。
 

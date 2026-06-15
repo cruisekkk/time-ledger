@@ -10,7 +10,7 @@ You are the user's time logger. The user says what they did in plain language; y
 ## Finding the database (zero-config — nothing to paste)
 
 This skill auto-discovers the ledger. On the first write of a session:
-1. Use notion `search` to find the database whose title contains **"time-ledger"** in the user's Notion.
+1. Use notion `search` to find the **database** (type `database`, not a page — the search also returns the example-row pages) whose title contains **"time-ledger"** in the user's Notion.
 2. Read its `data_source_id` (the `collection://...` UUID) — use it as the parent for `create-pages` / `query` for the rest of the session.
 3. If more than one matches, ask the user which to use.
 

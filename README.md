@@ -36,11 +36,11 @@ Then pick your form — both do the same thing, just a different surface:
 <th width="50%">💬 Web · Claude.ai</th>
 </tr>
 <tr>
-<td><img src="./assets/demo-terminal.gif" alt="terminal demo: claude -p logs your time" /></td>
-<td><img src="./assets/demo-web.gif" alt="claude.ai web demo: chat logs your time" /></td>
+<td width="50%"><img src="./assets/demo-terminal.gif" alt="terminal demo: claude -p logs your time" width="100%" /></td>
+<td width="50%"><img src="./assets/demo-web.gif" alt="claude.ai web demo: chat logs your time" width="100%" /></td>
 </tr>
 <tr>
-<td valign="top">
+<td width="50%" valign="top">
 
 Drop the skill in:
 
@@ -59,7 +59,7 @@ claude -p "log it: read papers 2h today"
 *中文 → copy `SKILL.zh-CN.md` to that same `SKILL.md` path.*
 
 </td>
-<td valign="top">
+<td width="50%" valign="top">
 
 1. **Settings → Capabilities** → turn on **Code execution and file creation** (*"Required for skills"*).
 2. **[claude.ai/customize/skills](https://claude.ai/customize/skills)** → **+** → Create skill → **Write skill instructions** — paste the name, description, and body from **[`SKILL.md`](./SKILL.md)**.
@@ -70,7 +70,7 @@ claude -p "log it: read papers 2h today"
 </tr>
 </table>
 
-**Either way — no id to paste.** The skill finds your database by title (keep `time-ledger` / `时间账本` in it, and share just that one), reads its id, and writes the row — asking instead of guessing when it's unsure.
+**Either way — no id to paste.** The skill finds your database by title (keep `time-ledger` / `时间账本` in it, and share just that one), reads its id, and writes the row — asking instead of guessing when it's unsure. (On Claude.ai the first write pops an **approve** prompt — Notion's write tools default to *Needs approval* — so it's expected, not a hang.)
 
 > **Customize** — want different categories or another language? Change the fields in your database, then mirror them in the skill's instructions (the select values must match).
 
