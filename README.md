@@ -78,10 +78,9 @@ cp time-ledger/SKILL.md ~/.claude/skills/time-ledger/SKILL.md
 
 ## Honest limitations
 
-- **Depends on Claude + Notion**: this is a skill, not a standalone program. Without both, it doesn't run.
-- **Relies on you reporting**: it doesn't auto-track (deliberately — auto-tracking doesn't know *why* you spent the time). If you don't say it, it doesn't know.
-- **Compounding tags are a manual heuristic**: `compounding / consuming / neutral` are hand-tagged by rules today, not learned. A real "compounding engine" is on the roadmap, not in the repo.
-- **n=1**: the author used it solo for a handful of days; no large-sample validation.
+- You have to actually report — it doesn't auto-track (on purpose; a tracker doesn't know *why* you spent the time).
+- The `compounding / consuming / neutral` tags are hand-rules today, not learned — a real engine is roadmap, not repo.
+- n=1: used solo for a handful of days, no real validation.
 
 ## Design philosophy
 
