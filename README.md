@@ -1,58 +1,60 @@
 # time-ledger
 
-**用一句话记时间。** 你随口说"今天看了俩小时论文、撸铁一小时",一个 AI 把它解析成结构化的活动 / 时长 / 日期,写进你自己的 Notion 库。**拿不准就反过来问你——绝不瞎编。**
+**English** | [简体中文](README.zh-CN.md)
 
-不是计时器,不是表格。是一面照"你的时间有没有在复利"的镜子。
+**Track your time in one sentence.** You say what you did in plain language — *"read ML papers for two hours, hit the gym for one, did a LeetCode problem"* — and an AI parses it into structured activity / minutes / date and writes it to your own Notion database. **When it isn't sure, it asks you back instead of guessing.**
+
+Not a timer. Not a form. A mirror for whether your hours are actually compounding.
 
 ```
-你:   今天看了俩小时 ML system design,撸铁一小时,刷了道 leetcode
-AI:   记好 3 条 ✅
-      · 阅读 · ML system design · 120min · 复利
-      · 健身 · 撸铁 · 60min
-      · 刷题 · LeetCode · ~20min ❓ 待确认:你没说时长,我估的 20 分钟,对吗?
+You:  read ML system design for two hours, gym for one, did a leetcode
+AI:   Logged 3 entries ✅
+      · Reading · ML system design · 120min · compounding
+      · Fitness · gym · 60min
+      · LeetCode · ~20min ❓ to-confirm: you didn't say how long — I guessed 20min, right?
 ```
 
-## 为什么
+## Why
 
-所有手动时间日志都死于同一个原因:**记录摩擦**。RescueTime/Toggl 自动追踪但不懂你在干嘛;手动填表准但坚持不了三天。
+Every manual time log dies of the same thing: **logging friction**. RescueTime/Toggl auto-track but don't know *what* you were doing or *why*; manual forms are accurate but you quit in three days.
 
-time-ledger 把摩擦压到零:**你说人话,LLM 干脏活**(归类、估时长、写库)。而它和别的"AI 记账"最大的不同是一条**诚实契约**——
+time-ledger drops the friction to zero: **you talk, the LLM does the grunt work** (categorize, estimate duration, write the row). What sets it apart from other "AI logging" is one **honesty contract**:
 
-> 拿不准的(多久?哪类?哪天?"2h+1h"是 3h 还是 2h?)它**标记并攒着批量问你**,而不是猜一个填进去。
+> When it's unsure (how long? which category? which day? is "2h + 1h" three hours, or is the second inside the first?), it **flags it and batch-asks you** — instead of filling in a guess.
 
-这条很关键:语言模型默认被训练成"宁可猜也别空着"(见 OpenAI《Why Language Models Hallucinate》, arXiv 2509.04664)。一个会替你**记录事实**的工具,如果也爱猜,数据就废了。所以 time-ledger 反着来——**不确定,就问。**
+This matters: language models are trained to *guess rather than abstain* (see OpenAI's *Why Language Models Hallucinate*, [arXiv 2509.04664](https://arxiv.org/abs/2509.04664)). A tool that **records facts for you** is worthless if it also guesses. So time-ledger inverts the default — **when unsure, ask.**
 
-## 这是什么形态
+## What it is
 
-它是一个 **Claude Code / Claude.ai Skill**(就是一份 `SKILL.md` 指令)+ 一个你自己的 **Notion database**。没有服务器、没有要部署的后端。捕获在任何有 Claude 的地方(手机/电脑/对话),数据真相源在你的 Notion(云端、手机原生可看)。
+A **Claude skill** (a single `SKILL.md` of instructions) + your own **Notion database**. No server, no backend to deploy. Capture anywhere you have Claude (phone / laptop / chat); the source of truth lives in your Notion (cloud, phone-native).
 
-## 安装（约 10 分钟）
+## Install (~10 min)
 
-**前置**: 一个 Notion 账号 + Claude(Claude Code,或 Claude.ai 连了 Notion 连接器)。
+**Prerequisites**: a Notion account + Claude (Claude Code, or Claude.ai with the Notion connector enabled).
 
-1. **建 Notion 库** — 照 [`notion-schema.md`](./notion-schema.md) 在 Notion 里新建一个 database,加好那 7 个字段(记录/活动/分钟/时间/状态/复利/备注)。
-2. **拿 data_source_id** — 见 `notion-schema.md` 末尾(让 Claude `fetch` 这个库,或从 URL 取)。
-3. **装 skill** — 把 [`SKILL.md`](./SKILL.md) 放到 `~/.claude/skills/time-ledger/SKILL.md`,**把里面 `<YOUR_NOTION_DATA_SOURCE_ID>` 那一行换成你第 2 步拿到的值**。
-4. **连 Notion** — 确保你的 Claude 连了 Notion(Claude Code: 加 Notion MCP 连接器;Claude.ai: Settings → Connectors → Notion)。
-5. **开记** — 对 Claude 说"记一下:今天写代码三小时"。
+1. **Create the Notion database** — follow [`notion-schema.md`](./notion-schema.md): a new database with 7 properties (记录/活动/分钟/时间/状态/复利/备注). *(Rename to English fields if you prefer — see the schema note.)*
+2. **Get your `data_source_id`** — see the end of `notion-schema.md` (ask Claude to `fetch` the database, or read it from the URL).
+3. **Install the skill** — drop [`SKILL.md`](./SKILL.md) into `~/.claude/skills/time-ledger/SKILL.md`, and **replace `<YOUR_NOTION_DATA_SOURCE_ID>` with the value from step 2**.
+4. **Connect Notion** — make sure your Claude is connected to Notion (Claude Code: add the Notion MCP connector; Claude.ai: Settings → Connectors → Notion).
+5. **Start logging** — tell Claude *"log it: wrote code for three hours today."*
 
-## 怎么用
+## Usage
 
-- **直接报**: 随口说做了啥 → AI 解析写入,拿不准的批量问你。
-- **批量整理**: 说"整理时间账本" → AI 把"待确认"的行捞出来一次性问清、补齐。
-- **看分布**: Notion 自带日历视图 + 按活动 group 汇总;或让 Claude 现场画一张图。
+- **Just report**: say what you did → the AI parses and writes it, batch-asking on anything uncertain.
+- **Batch reconcile**: say *"tidy up my time ledger"* → the AI pulls every `待确认` (to-confirm) row and asks you in one message, then fills them in.
+- **See the breakdown**: Notion's built-in calendar view + group-by-activity sum; or ask Claude to draw a chart on the spot.
 
-## 诚实的局限
+## Honest limitations
 
-- **依赖 Claude + Notion**:这是个 skill,不是独立程序。没有这两样跑不起来。
-- **靠主动报**:它不自动追踪(那是有意的——自动追踪不懂你"为什么"花这时间)。你不说,它不知道。
-- **复利标签是手动启发式**:`复利/消耗/中性` 现在靠规则手动标,不是学出来的。一个真正的"复利引擎"是 roadmap,不是现状。
-- **n=1**:作者一个人用了若干天,没有大样本验证。
+- **Depends on Claude + Notion**: this is a skill, not a standalone program. Without both, it doesn't run.
+- **Relies on you reporting**: it doesn't auto-track (deliberately — auto-tracking doesn't know *why* you spent the time). If you don't say it, it doesn't know.
+- **Compounding tags are a manual heuristic**: `compounding / consuming / neutral` are hand-tagged by rules today, not learned. A real "compounding engine" is on the roadmap, not in the repo.
+- **n=1**: the author used it solo for a handful of days; no large-sample validation.
 
-## 设计哲学
+## Design philosophy
 
-来自一个更大的个人项目(inveself)的一句话:**"你得先成为一个会复利的人,才能做好复利的投资。"** 这个账本是那句话的工具——它诚实地照出你的小时数到底有没有在利滚利(它曾照出作者某周 reading:building ≈ 30:1)。
+From a larger personal project (inveself), one line: **"You have to become a compounding *person* before you can be a good compounding *investor*."** This ledger is the tool for that line — it honestly mirrors whether your hours compound (it once showed the author a week of reading:building ≈ 30:1).
 
 ## License
 
-MIT — 见 [LICENSE](./LICENSE)。拿去改、拿去用、拿去发你自己的版本。
+MIT — see [LICENSE](./LICENSE). Fork it, use it, ship your own version.
