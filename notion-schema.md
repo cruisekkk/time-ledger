@@ -1,6 +1,8 @@
-# Notion database template
+# Notion database — reference
 
-time-ledger writes into **your own** Notion database. Create one like this — a few minutes.
+**Easiest path: duplicate the ready-made template** (linked in the README — one click, with fields, views, and example rows already in it). This file is the reference for what's inside, or for building it by hand if you prefer.
+
+time-ledger writes into **your own** Notion database.
 
 ## Fields (7)
 

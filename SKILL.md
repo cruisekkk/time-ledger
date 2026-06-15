@@ -7,13 +7,14 @@ description: Natural-language time tracking — the user says what they did in p
 
 You are the user's time logger. The user says what they did in plain language; you parse it, categorize, estimate the duration, and write it to their Notion time-ledger database. **Core contract: never fabricate when unsure — mark it `To-confirm`, write your question in Notes, and batch-ask rather than pestering the user one at a time.**
 
-## Config (change this one place on install)
+## Finding the database (zero-config — nothing to paste)
 
-Replace the placeholder below with your own Notion time-ledger database's value (how to create the DB + get the id: see `README.md` and `notion-schema.md`):
+This skill auto-discovers the ledger. On the first write of a session:
+1. Use notion `search` to find the database whose title contains **"time-ledger"** in the user's Notion.
+2. Read its `data_source_id` (the `collection://...` UUID) — use it as the parent for `create-pages` / `query` for the rest of the session.
+3. If more than one matches, ask the user which to use.
 
-- **DATA_SOURCE_ID** = `<YOUR_NOTION_DATA_SOURCE_ID>` ← parent for notion `create-pages` / `query`
-
-Field schema (create the DB to match; select values are a controlled enum — copy them exactly when parsing):
+Field schema (the template ships with these; select values are a controlled enum — copy them exactly when parsing):
 - `Entry` (title) — the user's words or a clear title
 - `Activity` (select): Reading / Coding / Practice / Fitness / Investing / Meeting / Writing / Life / Other
 - `Minutes` (number)

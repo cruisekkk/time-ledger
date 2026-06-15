@@ -28,15 +28,18 @@ time-ledger 把摩擦压到零:**你说人话,LLM 干脏活**(归类、估时长
 
 它是一个 **Claude Skill**(就是一份 `SKILL.md` 指令)+ 一个你自己的 **Notion database**。没有服务器、没有要部署的后端。捕获在任何有 Claude 的地方(手机/电脑/对话),数据真相源在你的 Notion(云端、手机原生可看)。
 
-## 安装（约 10 分钟）
+## 安装（约 3 分钟,零配置）
 
 **前置**: 一个 Notion 账号 + Claude(Claude Code,或 Claude.ai 连了 Notion 连接器)。
 
-1. **建 Notion 库** — 照 [`notion-schema.md`](./notion-schema.md) 在 Notion 里新建一个 database,加好那 7 个字段(Entry / Activity / Minutes / Date / Status / Compounding / Notes,均为英文)。
-2. **拿 `data_source_id`** — 见 `notion-schema.md` 末尾(让 Claude `fetch` 这个库,或从 URL 取)。
-3. **装 skill** — 把 [`SKILL.md`](./SKILL.md) 放到 `~/.claude/skills/time-ledger/SKILL.md`,**把里面 `<YOUR_NOTION_DATA_SOURCE_ID>` 那一行换成你第 2 步拿到的值**。
-4. **连 Notion** — 确保你的 Claude 连了 Notion(Claude Code: 加 Notion MCP 连接器;Claude.ai: Settings → Connectors → Notion)。
-5. **开记** — 对 Claude 说"记一下:今天写代码三小时"。
+1. **复制 Notion 模板** — 一键,不用建任何字段(字段、视图、示例都含好了):
+   - 🇨🇳 中文: [**复制「时间账本」模板 →**](<ZH_TEMPLATE_LINK>)
+   - 🇬🇧 English: [**Duplicate the `time-ledger` template →**](<EN_TEMPLATE_LINK>)
+2. **装 skill** — 把其中一个放到 `~/.claude/skills/time-ledger/SKILL.md`:
+   - 中文 → [`SKILL.zh-CN.md`](./SKILL.zh-CN.md)  ·  English → [`SKILL.md`](./SKILL.md)
+   - *不用填 id —— skill 按名字自动找到你复制的库。*
+3. **连 Notion** — 确保 Claude 连了 Notion(Claude Code: 加 Notion MCP 连接器;Claude.ai: Settings → Connectors → Notion)。
+4. **开记** — 对 Claude 说"记一下:今天写代码三小时"。
 
 ## 怎么用
 

@@ -28,15 +28,18 @@ This matters: language models are trained to *guess rather than abstain* (see Op
 
 A **Claude skill** (a single `SKILL.md` of instructions) + your own **Notion database**. No server, no backend to deploy. Capture anywhere you have Claude (phone / laptop / chat); the source of truth lives in your Notion (cloud, phone-native).
 
-## Install (~10 min)
+## Install (~3 min, zero-config)
 
 **Prerequisites**: a Notion account + Claude (Claude Code, or Claude.ai with the Notion connector enabled).
 
-1. **Create the Notion database** — follow [`notion-schema.md`](./notion-schema.md): a new database with 7 properties (Entry / Activity / Minutes / Date / Status / Compounding / Notes).
-2. **Get your `data_source_id`** — see the end of `notion-schema.md` (ask Claude to `fetch` the database, or read it from the URL).
-3. **Install the skill** — drop [`SKILL.md`](./SKILL.md) into `~/.claude/skills/time-ledger/SKILL.md`, and **replace `<YOUR_NOTION_DATA_SOURCE_ID>` with the value from step 2**.
-4. **Connect Notion** — make sure your Claude is connected to Notion (Claude Code: add the Notion MCP connector; Claude.ai: Settings → Connectors → Notion).
-5. **Start logging** — tell Claude *"log it: wrote code for three hours today."*
+1. **Duplicate the Notion template** — one click, nothing to build (fields, views, and example rows included):
+   - 🇬🇧 English: [**Duplicate the `time-ledger` template →**](<EN_TEMPLATE_LINK>)
+   - 🇨🇳 中文: [**复制「时间账本」模板 →**](<ZH_TEMPLATE_LINK>)
+2. **Install the skill** — drop one into `~/.claude/skills/time-ledger/SKILL.md`:
+   - English → [`SKILL.md`](./SKILL.md)  ·  中文 → [`SKILL.zh-CN.md`](./SKILL.zh-CN.md)
+   - *No id to paste — the skill auto-finds your duplicated database by name.*
+3. **Connect Notion** — make sure your Claude is connected to Notion (Claude Code: add the Notion MCP connector; Claude.ai: Settings → Connectors → Notion).
+4. **Start logging** — tell Claude *"log it: wrote code for three hours today."*
 
 ## Usage
 
