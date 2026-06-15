@@ -42,21 +42,9 @@ AI:   记好 3 条 ✅
 <tr>
 <td width="50%" valign="top">
 
-把 skill 放进去:
-
-```bash
-git clone https://github.com/cruisekkk/time-ledger.git
-mkdir -p ~/.claude/skills/time-ledger
-cp time-ledger/SKILL.zh-CN.md ~/.claude/skills/time-ledger/SKILL.md
-```
-
-加上 **Notion MCP 连接器**(把你的「时间账本」库授权给它),重启 Claude Code,然后:
-
-```bash
-claude -p "记一下:今天看了俩小时论文"
-```
-
-*English → 把 `SKILL.md` 拷到同一个 `SKILL.md` 路径。*
+1. clone 仓库,把 `SKILL.zh-CN.md` 放到 `~/.claude/skills/time-ledger/SKILL.md` —— **命令在下面 ↓**
+2. 加 **Notion MCP 连接器**(把你的「时间账本」库授权给它),重启 Claude Code。
+3. 记一笔: `claude -p "记一下:今天看了俩小时论文"`
 
 </td>
 <td width="50%" valign="top">
@@ -69,6 +57,14 @@ claude -p "记一下:今天看了俩小时论文"
 </td>
 </tr>
 </table>
+
+**Claude Code 命令**(中文版用 `SKILL.zh-CN.md`):
+
+```bash
+git clone https://github.com/cruisekkk/time-ledger.git
+mkdir -p ~/.claude/skills/time-ledger
+cp time-ledger/SKILL.zh-CN.md ~/.claude/skills/time-ledger/SKILL.md
+```
 
 **两种都一样 —— 不用填 id。** skill 按标题找你的库(保留 `时间账本` / `time-ledger`、只授权这一个),读它的 id,写进去——拿不准就问,不瞎猜。(在 Claude.ai 上第一次写入会弹 **approve** —— Notion 写工具默认 *Needs approval* —— 是正常的,不是卡住了。)
 

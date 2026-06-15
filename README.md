@@ -42,21 +42,9 @@ Then pick your form — both do the same thing, just a different surface:
 <tr>
 <td width="50%" valign="top">
 
-Drop the skill in:
-
-```bash
-git clone https://github.com/cruisekkk/time-ledger.git
-mkdir -p ~/.claude/skills/time-ledger
-cp time-ledger/SKILL.md ~/.claude/skills/time-ledger/SKILL.md
-```
-
-Add the **Notion MCP connector** (granting it your `time-ledger` DB), restart Claude Code, then:
-
-```bash
-claude -p "log it: read papers 2h today"
-```
-
-*中文 → copy `SKILL.zh-CN.md` to that same `SKILL.md` path.*
+1. Clone the repo and drop `SKILL.md` into `~/.claude/skills/time-ledger/` — **commands below ↓**
+2. Add the **Notion MCP connector** (grant your `time-ledger` DB), then restart Claude Code.
+3. Log: `claude -p "log it: read papers 2h today"`
 
 </td>
 <td width="50%" valign="top">
@@ -69,6 +57,14 @@ claude -p "log it: read papers 2h today"
 </td>
 </tr>
 </table>
+
+**Claude Code commands** (中文 → swap `SKILL.md` for `SKILL.zh-CN.md`):
+
+```bash
+git clone https://github.com/cruisekkk/time-ledger.git
+mkdir -p ~/.claude/skills/time-ledger
+cp time-ledger/SKILL.md ~/.claude/skills/time-ledger/SKILL.md
+```
 
 **Either way — no id to paste.** The skill finds your database by title (keep `time-ledger` / `时间账本` in it, and share just that one), reads its id, and writes the row — asking instead of guessing when it's unsure. (On Claude.ai the first write pops an **approve** prompt — Notion's write tools default to *Needs approval* — so it's expected, not a hang.)
 
