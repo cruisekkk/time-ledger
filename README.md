@@ -33,8 +33,8 @@ A **Claude skill** (a single `SKILL.md` of instructions) + your own **Notion dat
 **Prerequisites**: a Notion account + Claude (Claude Code, or Claude.ai with the Notion connector enabled).
 
 1. **Duplicate the Notion template** — one click, nothing to build (fields, views, and example rows included):
-   - 🇬🇧 English: [**Duplicate the `time-ledger` template →**](<EN_TEMPLATE_LINK>)
-   - 🇨🇳 中文: [**复制「时间账本」模板 →**](<ZH_TEMPLATE_LINK>)
+   - 🇬🇧 English: [**Duplicate the `time-ledger` template →**](https://spiral-jump-106.notion.site/0d3d3d13164241f595aa50679c6c42d8)
+   - 🇨🇳 中文: [**复制「时间账本」模板 →**](https://spiral-jump-106.notion.site/c7e8fde1248f4b4a9b204ccca99c153f)
 2. **Install the skill** — drop one into `~/.claude/skills/time-ledger/SKILL.md`:
    - English → [`SKILL.md`](./SKILL.md)  ·  中文 → [`SKILL.zh-CN.md`](./SKILL.zh-CN.md)
    - *No id to paste — the skill auto-finds your duplicated database by name.*

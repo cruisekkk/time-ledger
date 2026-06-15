@@ -33,8 +33,8 @@ time-ledger 把摩擦压到零:**你说人话,LLM 干脏活**(归类、估时长
 **前置**: 一个 Notion 账号 + Claude(Claude Code,或 Claude.ai 连了 Notion 连接器)。
 
 1. **复制 Notion 模板** — 一键,不用建任何字段(字段、视图、示例都含好了):
-   - 🇨🇳 中文: [**复制「时间账本」模板 →**](<ZH_TEMPLATE_LINK>)
-   - 🇬🇧 English: [**Duplicate the `time-ledger` template →**](<EN_TEMPLATE_LINK>)
+   - 🇨🇳 中文: [**复制「时间账本」模板 →**](https://spiral-jump-106.notion.site/c7e8fde1248f4b4a9b204ccca99c153f)
+   - 🇬🇧 English: [**Duplicate the `time-ledger` template →**](https://spiral-jump-106.notion.site/0d3d3d13164241f595aa50679c6c42d8)
 2. **装 skill** — 把其中一个放到 `~/.claude/skills/time-ledger/SKILL.md`:
    - 中文 → [`SKILL.zh-CN.md`](./SKILL.zh-CN.md)  ·  English → [`SKILL.md`](./SKILL.md)
    - *不用填 id —— skill 按名字自动找到你复制的库。*
