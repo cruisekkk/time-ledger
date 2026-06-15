@@ -81,6 +81,7 @@ cp time-ledger/SKILL.zh-CN.md ~/.claude/skills/time-ledger/SKILL.md
 - 得你主动报 —— 它不自动追踪(有意的;追踪器不懂你"为什么"花这时间)。
 - `复利 / 消耗 / 中性` 现在是手动规则,不是学出来的 —— 真正的引擎是 roadmap,不是现状。
 - n=1:作者一个人用了几天,没大样本验证。
+- 暂时没有快速接入 ChatGPT 的办法 —— 它还不像 Claude 那样支持自定义 skill,没有现成接法(Custom GPT 能做,但得重搭)。希望 OpenAI 早点支持自定义 skill。
 
 ## 设计哲学
 

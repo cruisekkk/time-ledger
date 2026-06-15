@@ -1,9 +1,11 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, spring} from 'remotion';
 
-const BG = '#FAF9F5';
-const INK = '#23221E';
+const BG = '#F5F4EE';
+const INK = '#2A2A27';
 const MUTED = '#76746C';
+const CLAUDE = '#D97757';
+const USERBUBBLE = '#ECEAE0';
 const TEAL = '#1D9E75';
 const TEAL_BG = '#E1F5EE';
 const TEAL_INK = '#0F6E56';
@@ -11,8 +13,7 @@ const GRAY = '#9A988F';
 const AMBER = '#BA7517';
 const AMBER_BG = '#FAEEDA';
 const AMBER_INK = '#854F0B';
-const CARD = '#FFFFFF';
-const BORDER = 'rgba(0,0,0,0.09)';
+const BORDER = 'rgba(0,0,0,0.10)';
 const FONT =
   'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", sans-serif';
 
@@ -31,13 +32,25 @@ const WEEK = [
   {label: 'Coding', h: 1.8, color: TEAL},
 ];
 
+const Sparkle: React.FC<{size: number}> = ({size}) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" style={{display: 'block'}}>
+    {Array.from({length: 12}).map((_, i) => {
+      const a = (i * 30 * Math.PI) / 180;
+      const x1 = 50 + Math.cos(a) * 15;
+      const y1 = 50 + Math.sin(a) * 15;
+      const x2 = 50 + Math.cos(a) * 47;
+      const y2 = 50 + Math.sin(a) * 47;
+      return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={CLAUDE} strokeWidth={7} strokeLinecap="round" />;
+    })}
+  </svg>
+);
+
 const easeIn = (frame: number, fps: number, delay: number) =>
   spring({frame: frame - delay, fps, config: {damping: 200}});
 
 export const TimeLedgerDemo: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-
   const sceneA = interpolate(frame, [410, 448], [1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   const sceneB = interpolate(frame, [420, 458], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 
@@ -49,16 +62,6 @@ export const TimeLedgerDemo: React.FC = () => {
   );
 };
 
-const Header: React.FC = () => (
-  <div style={{display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28}}>
-    <div style={{width: 26, height: 26, borderRadius: 13, border: `3px solid ${TEAL}`, position: 'relative'}}>
-      <div style={{position: 'absolute', left: 10, top: 4, width: 2.5, height: 9, background: TEAL, borderRadius: 2}} />
-      <div style={{position: 'absolute', left: 11, top: 11, width: 6, height: 2.5, background: TEAL, borderRadius: 2}} />
-    </div>
-    <div style={{fontSize: 26, fontWeight: 600, color: INK, letterSpacing: -0.3}}>time-ledger</div>
-  </div>
-);
-
 const SceneChat: React.FC<{frame: number; fps: number; opacity: number}> = ({frame, fps, opacity}) => {
   const headerIn = interpolate(frame, [0, 14], [0, 1], {extrapolateRight: 'clamp'});
 
@@ -68,65 +71,78 @@ const SceneChat: React.FC<{frame: number; fps: number; opacity: number}> = ({fra
   const typed = SENTENCE.slice(0, nChars);
   const typing = nChars < SENTENCE.length && frame > typeStart;
   const caret = typing && Math.floor(frame / 8) % 2 === 0;
-  const userBubbleIn = interpolate(frame, [typeStart - 6, typeStart + 4], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const userIn = interpolate(frame, [typeStart - 6, typeStart + 4], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 
   const replyStart = 150;
-  const headerReply = easeIn(frame, fps, replyStart);
-  const showDots = frame > 118 && frame < replyStart;
+  const reply = easeIn(frame, fps, replyStart);
+  const thinking = frame > 116 && frame < replyStart;
 
   return (
-    <AbsoluteFill style={{opacity, padding: '64px 0', alignItems: 'center'}}>
-      <div style={{width: 900, opacity: headerIn}}>
-        <Header />
-
-        <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: 22}}>
-          <div
-            style={{
-              maxWidth: 640,
-              background: INK,
-              color: '#F5F4EF',
-              fontSize: 27,
-              lineHeight: 1.5,
-              padding: '18px 24px',
-              borderRadius: 22,
-              borderBottomRightRadius: 6,
-              opacity: userBubbleIn,
-              transform: `translateY(${interpolate(userBubbleIn, [0, 1], [12, 0])}px)`,
-            }}
-          >
-            {typed}
-            {caret ? <span style={{opacity: 0.7}}>▋</span> : null}
-          </div>
+    <AbsoluteFill style={{opacity, alignItems: 'center'}}>
+      <div style={{width: 880, height: '100%', display: 'flex', flexDirection: 'column', padding: '34px 0 26px'}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 9, opacity: headerIn}}>
+          <Sparkle size={24} />
+          <span style={{fontSize: 21, color: INK, fontWeight: 500}}>Claude</span>
         </div>
 
-        {showDots ? (
-          <div style={{display: 'flex', alignItems: 'center', gap: 8, color: MUTED, fontSize: 22, marginBottom: 10}}>
-            <span style={{color: TEAL, fontWeight: 600}}>time-ledger</span>
-            <Dots frame={frame} />
+        <div style={{flex: 1, paddingTop: 30}}>
+          <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: 26}}>
+            <div
+              style={{
+                maxWidth: 600,
+                background: USERBUBBLE,
+                color: INK,
+                fontSize: 25,
+                lineHeight: 1.5,
+                padding: '15px 21px',
+                borderRadius: 20,
+                opacity: userIn,
+                transform: `translateY(${interpolate(userIn, [0, 1], [10, 0])}px)`,
+              }}
+            >
+              {typed}
+              {caret ? <span style={{opacity: 0.6}}>▋</span> : null}
+            </div>
           </div>
-        ) : null}
 
-        {headerReply > 0.02 ? (
-          <div
-            style={{
-              background: CARD,
-              border: `1px solid ${BORDER}`,
-              borderRadius: 22,
-              borderBottomLeftRadius: 6,
-              padding: '22px 26px',
-              maxWidth: 720,
-              opacity: headerReply,
-              transform: `translateY(${interpolate(headerReply, [0, 1], [14, 0])}px)`,
-              boxShadow: '0 1px 0 rgba(0,0,0,0.03)',
-            }}
-          >
-            <div style={{fontSize: 25, fontWeight: 600, color: INK, marginBottom: 18}}>Logged 3 entries ✅</div>
-            {ROWS.map((r, i) => (
-              <Row key={i} r={r} frame={frame} fps={fps} delay={replyStart + 26 + i * 24} />
-            ))}
-            <Confirm frame={frame} />
-          </div>
-        ) : null}
+          {thinking ? (
+            <div style={{display: 'flex', alignItems: 'center', gap: 13}}>
+              <Sparkle size={24} />
+              <Dots frame={frame} />
+            </div>
+          ) : null}
+
+          {reply > 0.02 ? (
+            <div style={{display: 'flex', gap: 15, opacity: reply, transform: `translateY(${interpolate(reply, [0, 1], [10, 0])}px)`}}>
+              <div style={{marginTop: 2}}>
+                <Sparkle size={24} />
+              </div>
+              <div style={{flex: 1}}>
+                <div style={{fontSize: 24, color: INK, marginBottom: 16}}>Logged 3 entries ✅</div>
+                {ROWS.map((r, i) => (
+                  <Row key={i} r={r} frame={frame} fps={fps} delay={replyStart + 24 + i * 22} />
+                ))}
+                <Confirm frame={frame} />
+              </div>
+            </div>
+          ) : null}
+        </div>
+
+        <div
+          style={{
+            border: `1px solid ${BORDER}`,
+            borderRadius: 16,
+            padding: '15px 18px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            background: '#FBFAF6',
+            opacity: headerIn,
+          }}
+        >
+          <span style={{color: MUTED, fontSize: 20}}>Reply to Claude…</span>
+          <div style={{width: 34, height: 34, borderRadius: 17, background: CLAUDE, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 19}}>↑</div>
+        </div>
       </div>
     </AbsoluteFill>
   );
@@ -146,55 +162,27 @@ const Dots: React.FC<{frame: number}> = ({frame}) => {
 const Row: React.FC<{r: typeof ROWS[number]; frame: number; fps: number; delay: number}> = ({r, frame, fps, delay}) => {
   const s = easeIn(frame, fps, delay);
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 14,
-        padding: '11px 0',
-        opacity: s,
-        transform: `translateX(${interpolate(s, [0, 1], [-18, 0])}px)`,
-      }}
-    >
-      <div style={{width: 10, height: 10, borderRadius: 5, background: r.dot, flexShrink: 0}} />
-      <div style={{fontSize: 23, fontWeight: 600, color: INK, width: 130}}>{r.act}</div>
-      <div style={{fontSize: 23, color: MUTED, flex: 1}}>{r.detail}</div>
-      <div style={{fontSize: 22, color: INK, width: 92, textAlign: 'right'}}>{r.min}</div>
+    <div style={{display: 'flex', alignItems: 'center', gap: 14, padding: '10px 0', opacity: s, transform: `translateX(${interpolate(s, [0, 1], [-14, 0])}px)`}}>
+      <div style={{width: 9, height: 9, borderRadius: 5, background: r.dot, flexShrink: 0}} />
+      <div style={{fontSize: 22, fontWeight: 500, color: INK, width: 128}}>{r.act}</div>
+      <div style={{fontSize: 22, color: MUTED, flex: 1}}>{r.detail}</div>
+      <div style={{fontSize: 21, color: INK, width: 88, textAlign: 'right'}}>{r.min}</div>
       <div style={{width: 150, textAlign: 'right'}}>
-        {r.tag ? (
-          <span style={{fontSize: 18, background: r.tagBg, color: r.tagInk, padding: '4px 12px', borderRadius: 999}}>{r.tag}</span>
-        ) : null}
+        {r.tag ? <span style={{fontSize: 17, background: r.tagBg, color: r.tagInk, padding: '4px 12px', borderRadius: 999}}>{r.tag}</span> : null}
       </div>
     </div>
   );
 };
 
 const Confirm: React.FC<{frame: number}> = ({frame}) => {
-  const start = 252;
+  const start = 250;
   const o = interpolate(frame, [start, start + 16], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
-  const pulse = 1 + 0.04 * Math.max(0, Math.sin((frame - start) / 7));
   if (o < 0.02) return null;
   return (
-    <div
-      style={{
-        marginTop: 16,
-        marginLeft: 24,
-        background: AMBER_BG,
-        border: `1px solid rgba(186,117,23,0.35)`,
-        borderRadius: 14,
-        padding: '14px 18px',
-        display: 'flex',
-        gap: 12,
-        alignItems: 'flex-start',
-        maxWidth: 600,
-        opacity: o,
-        transform: `scale(${interpolate(o, [0, 1], [0.96, 1]) * (frame < start + 30 ? pulse : 1)})`,
-        transformOrigin: 'left center',
-      }}
-    >
-      <div style={{fontSize: 22}}>❓</div>
-      <div style={{fontSize: 21, lineHeight: 1.45, color: AMBER_INK}}>
-        <span style={{fontWeight: 600}}>to-confirm:</span> you didn't say how long — I guessed 20min, right?
+    <div style={{marginTop: 14, background: AMBER_BG, border: `1px solid rgba(186,117,23,0.35)`, borderRadius: 14, padding: '13px 17px', display: 'flex', gap: 11, alignItems: 'flex-start', maxWidth: 580, opacity: o, transform: `translateY(${interpolate(o, [0, 1], [6, 0])}px)`}}>
+      <div style={{fontSize: 21}}>❓</div>
+      <div style={{fontSize: 20, lineHeight: 1.45, color: AMBER_INK}}>
+        <span style={{fontWeight: 500}}>to-confirm:</span> you didn't say how long — I guessed 20min, right?
       </div>
     </div>
   );
@@ -207,16 +195,19 @@ const SceneWeek: React.FC<{frame: number; fps: number; opacity: number}> = ({fra
   const urlIn = interpolate(frame, [540, 566], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 
   return (
-    <AbsoluteFill style={{opacity, alignItems: 'center', justifyContent: 'center', padding: '0 0'}}>
+    <AbsoluteFill style={{opacity, alignItems: 'center', justifyContent: 'center'}}>
       <div style={{width: 820}}>
-        <div style={{fontSize: 22, color: MUTED, marginBottom: 26, opacity: titleIn}}>so where did the week go?</div>
+        <div style={{display: 'flex', alignItems: 'center', gap: 11, marginBottom: 26, opacity: titleIn}}>
+          <Sparkle size={22} />
+          <span style={{fontSize: 22, color: MUTED}}>so where did the week go?</span>
+        </div>
         <div style={{display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 44}}>
           {WEEK.map((b, i) => {
             const s = easeIn(frame, fps, 452 + i * 12);
             const w = (b.h / maxH) * 620 * s;
             return (
               <div key={i} style={{display: 'flex', alignItems: 'center', gap: 18}}>
-                <div style={{width: 110, fontSize: 24, color: INK, fontWeight: 600}}>{b.label}</div>
+                <div style={{width: 110, fontSize: 24, color: INK, fontWeight: 500}}>{b.label}</div>
                 <div style={{flex: 1, height: 26, position: 'relative'}}>
                   <div style={{height: 26, width: 620, background: 'rgba(0,0,0,0.05)', borderRadius: 999, position: 'absolute'}} />
                   <div style={{height: 26, width: w, background: b.color, borderRadius: 999, position: 'absolute'}} />
@@ -226,10 +217,10 @@ const SceneWeek: React.FC<{frame: number; fps: number; opacity: number}> = ({fra
             );
           })}
         </div>
-        <div style={{fontSize: 32, fontWeight: 600, color: INK, lineHeight: 1.4, opacity: taglineIn, transform: `translateY(${interpolate(taglineIn, [0, 1], [10, 0])}px)`}}>
+        <div style={{fontSize: 32, fontWeight: 500, color: INK, lineHeight: 1.4, opacity: taglineIn, transform: `translateY(${interpolate(taglineIn, [0, 1], [10, 0])}px)`}}>
           Track your time in one sentence.
           <br />
-          <span style={{color: TEAL}}>When it's unsure, it asks</span> — it doesn't guess.
+          <span style={{color: CLAUDE}}>When it's unsure, it asks</span> — it doesn't guess.
         </div>
         <div style={{fontSize: 22, color: MUTED, marginTop: 22, opacity: urlIn}}>github.com/cruisekkk/time-ledger</div>
       </div>
