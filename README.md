@@ -6,8 +6,6 @@
 
 Not a timer. Not a form. A mirror for whether your hours are actually compounding.
 
-![time-ledger demo — say one sentence, it logs the rows and asks when it's unsure](./assets/demo.gif)
-
 ```
 You:  read ML system design for two hours, gym for one, did a leetcode
 AI:   Logged 3 entries ✅
@@ -18,30 +16,63 @@ AI:   Logged 3 entries ✅
 
 ## Why
 
-Every manual time log dies of the same thing: **logging friction**. RescueTime/Toggl auto-track but don't know *what* you were doing or *why*; manual forms are accurate but you quit in three days.
+I'm lazy — I won't keep a form going — but I do want to know where my time goes: am I wasting it, or compounding it?
 
-time-ledger drops the friction to zero: **you talk, the LLM does the grunt work** (categorize, estimate duration, write the row). What sets it apart from other "AI logging" is one **honesty contract**:
-
-> When it's unsure (how long? which category? which day? is "2h + 1h" three hours, or is the second inside the first?), it **flags it and batch-asks you** — instead of filling in a guess.
-
-This matters: language models are trained to *guess rather than abstain* (see OpenAI's *Why Language Models Hallucinate*, [arXiv 2509.04664](https://arxiv.org/abs/2509.04664)). A tool that **records facts for you** is worthless if it also guesses. So time-ledger inverts the default — **when unsure, ask.**
+So you just say what you did, and the LLM does the grunt work — categorize it, estimate the duration, write the row. Its one rule: **when it's unsure (how long? which day? is "2h + 1h" three hours, or two?), it asks instead of guessing.** A log that quietly invents facts is worse than no log at all.
 
 ## What it is
 
 A **Claude skill** (a single `SKILL.md` of instructions) + your own **Notion database**. No server, no backend to deploy. Capture anywhere you have Claude (phone / laptop / chat); the source of truth lives in your Notion (cloud, phone-native).
 
-## Install (~3 min, zero-config)
+## Install
 
-**Prerequisites**: a Notion account + Claude (Claude Code, or Claude.ai with the Notion connector enabled).
+**Step 0 — duplicate the Notion template** (same for both forms): [🇬🇧 English](https://spiral-jump-106.notion.site/0d3d3d13164241f595aa50679c6c42d8) · [🇨🇳 中文](https://spiral-jump-106.notion.site/c7e8fde1248f4b4a9b204ccca99c153f). One click; fields, views, and example rows included.
 
-1. **Duplicate the Notion template** — one click, nothing to build (fields, views, and example rows included):
-   - 🇬🇧 English: [**Duplicate the `time-ledger` template →**](https://spiral-jump-106.notion.site/0d3d3d13164241f595aa50679c6c42d8)
-   - 🇨🇳 中文: [**复制「时间账本」模板 →**](https://spiral-jump-106.notion.site/c7e8fde1248f4b4a9b204ccca99c153f)
-2. **Install the skill** — drop one into `~/.claude/skills/time-ledger/SKILL.md`:
-   - English → [`SKILL.md`](./SKILL.md)  ·  中文 → [`SKILL.zh-CN.md`](./SKILL.zh-CN.md)
-   - *No id to paste — the skill auto-finds your duplicated database by name.*
-3. **Connect Notion** — make sure your Claude is connected to Notion (Claude Code: add the Notion MCP connector; Claude.ai: Settings → Connectors → Notion).
-4. **Start logging** — tell Claude *"log it: wrote code for three hours today."*
+Then pick your form — both do the same thing, just a different surface:
+
+<table>
+<tr>
+<th width="50%">⌨️ Terminal · Claude Code</th>
+<th width="50%">💬 Web · Claude.ai</th>
+</tr>
+<tr>
+<td><img src="./assets/demo-terminal.gif" alt="terminal demo: claude -p logs your time" /></td>
+<td><img src="./assets/demo-web.gif" alt="claude.ai web demo: chat logs your time" /></td>
+</tr>
+<tr>
+<td valign="top">
+
+Drop the skill in:
+
+```bash
+git clone https://github.com/cruisekkk/time-ledger.git
+mkdir -p ~/.claude/skills/time-ledger
+cp time-ledger/SKILL.md ~/.claude/skills/time-ledger/SKILL.md
+```
+
+Add the **Notion MCP connector** (granting it your `time-ledger` DB), restart Claude Code, then:
+
+```bash
+claude -p "log it: read papers 2h today"
+```
+
+*中文 → copy `SKILL.zh-CN.md` to that same `SKILL.md` path.*
+
+</td>
+<td valign="top">
+
+1. **Settings → Capabilities** → turn on **Code execution and file creation** (*"Required for skills"*).
+2. **[claude.ai/customize/skills](https://claude.ai/customize/skills)** → **+** → Create skill → **Write skill instructions** — paste the name, description, and body from **[`SKILL.md`](./SKILL.md)**.
+3. **Settings → Connectors → Notion** — grant access to your `time-ledger` database.
+4. Just say *"log it: read papers 2h today."*
+
+</td>
+</tr>
+</table>
+
+**Either way — no id to paste.** The skill finds your database by title (keep `time-ledger` / `时间账本` in it, and share just that one), reads its id, and writes the row — asking instead of guessing when it's unsure.
+
+> **Customize** — want different categories or another language? Change the fields in your database, then mirror them in the skill's instructions (the select values must match).
 
 ## Usage
 

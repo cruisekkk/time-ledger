@@ -6,8 +6,6 @@
 
 不是计时器,不是表格。是一面照"你的时间有没有在复利"的镜子。
 
-![time-ledger 演示 — 说一句话,它记好几条,拿不准就反问](./assets/demo.gif)
-
 ```
 你:   今天看了俩小时 ML system design,撸铁一小时,刷了道 leetcode
 AI:   记好 3 条 ✅
@@ -18,30 +16,63 @@ AI:   记好 3 条 ✅
 
 ## 为什么
 
-所有手动时间日志都死于同一个原因:**记录摩擦**。RescueTime/Toggl 自动追踪但不懂你在干嘛;手动填表准但坚持不了三天。
+我懒——表格坚持不了三天——但我想知道时间花哪了:是在浪费,还是在复利。
 
-time-ledger 把摩擦压到零:**你说人话,LLM 干脏活**(归类、估时长、写库)。而它和别的"AI 记账"最大的不同是一条**诚实契约**——
-
-> 拿不准的(多久?哪类?哪天?"2h+1h"是 3h 还是 2h?)它**标记并攒着批量问你**,而不是猜一个填进去。
-
-这条很关键:语言模型默认被训练成"宁可猜也别空着"(见 OpenAI《Why Language Models Hallucinate》, [arXiv 2509.04664](https://arxiv.org/abs/2509.04664))。一个会替你**记录事实**的工具,如果也爱猜,数据就废了。所以 time-ledger 反着来——**不确定,就问。**
+所以你只管说一句做了啥,LLM 来干脏活——归类、估时长、写库。它只守一条规矩:**拿不准的时候(多久?哪天?"2h+1h" 是 3 小时还是 2 小时?),它问你,而不是瞎猜。** 一个会偷偷编数据的账本,比没有还糟。
 
 ## 这是什么形态
 
 它是一个 **Claude Skill**(就是一份 `SKILL.md` 指令)+ 一个你自己的 **Notion database**。没有服务器、没有要部署的后端。捕获在任何有 Claude 的地方(手机/电脑/对话),数据真相源在你的 Notion(云端、手机原生可看)。
 
-## 安装（约 3 分钟,零配置）
+## 安装
 
-**前置**: 一个 Notion 账号 + Claude(Claude Code,或 Claude.ai 连了 Notion 连接器)。
+**第 0 步 —— 复制 Notion 模板**(两种形式通用): [🇨🇳 中文](https://spiral-jump-106.notion.site/c7e8fde1248f4b4a9b204ccca99c153f) · [🇬🇧 English](https://spiral-jump-106.notion.site/0d3d3d13164241f595aa50679c6c42d8)。一键,字段、视图、示例都含好了。
 
-1. **复制 Notion 模板** — 一键,不用建任何字段(字段、视图、示例都含好了):
-   - 🇨🇳 中文: [**复制「时间账本」模板 →**](https://spiral-jump-106.notion.site/c7e8fde1248f4b4a9b204ccca99c153f)
-   - 🇬🇧 English: [**Duplicate the `time-ledger` template →**](https://spiral-jump-106.notion.site/0d3d3d13164241f595aa50679c6c42d8)
-2. **装 skill** — 把其中一个放到 `~/.claude/skills/time-ledger/SKILL.md`:
-   - 中文 → [`SKILL.zh-CN.md`](./SKILL.zh-CN.md)  ·  English → [`SKILL.md`](./SKILL.md)
-   - *不用填 id —— skill 按名字自动找到你复制的库。*
-3. **连 Notion** — 确保 Claude 连了 Notion(Claude Code: 加 Notion MCP 连接器;Claude.ai: Settings → Connectors → Notion)。
-4. **开记** — 对 Claude 说"记一下:今天写代码三小时"。
+然后挑你的形式 —— 两种干的是同一件事,只是界面不同:
+
+<table>
+<tr>
+<th width="50%">⌨️ 终端 · Claude Code</th>
+<th width="50%">💬 网页 · Claude.ai</th>
+</tr>
+<tr>
+<td><img src="./assets/demo-terminal.gif" alt="终端演示:claude -p 记录时间" /></td>
+<td><img src="./assets/demo-web.gif" alt="claude.ai 网页演示:对话记录时间" /></td>
+</tr>
+<tr>
+<td valign="top">
+
+把 skill 放进去:
+
+```bash
+git clone https://github.com/cruisekkk/time-ledger.git
+mkdir -p ~/.claude/skills/time-ledger
+cp time-ledger/SKILL.zh-CN.md ~/.claude/skills/time-ledger/SKILL.md
+```
+
+加上 **Notion MCP 连接器**(把你的「时间账本」库授权给它),重启 Claude Code,然后:
+
+```bash
+claude -p "记一下:今天看了俩小时论文"
+```
+
+*English → 把 `SKILL.md` 拷到同一个 `SKILL.md` 路径。*
+
+</td>
+<td valign="top">
+
+1. **Settings → Capabilities** → 打开 **Code execution and file creation**(*"Required for skills"*)。
+2. **[claude.ai/customize/skills](https://claude.ai/customize/skills)** → **+** → Create skill → **Write skill instructions** —— 把名字、描述、正文从 **[`SKILL.zh-CN.md`](./SKILL.zh-CN.md)** 拷进去。
+3. **Settings → Connectors → Notion** —— 把你的「时间账本」库授权给它。
+4. 直接说"记一下:今天看了俩小时论文"。
+
+</td>
+</tr>
+</table>
+
+**两种都一样 —— 不用填 id。** skill 按标题找你的库(保留 `时间账本` / `time-ledger`、只授权这一个),读它的 id,写进去——拿不准就问,不瞎猜。
+
+> **改字段** —— 想换分类或语言?在库里改字段,然后把 skill 指令里的枚举同步成一样的(select 值必须对得上)。
 
 ## 怎么用
 
