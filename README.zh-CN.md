@@ -82,7 +82,11 @@ cp time-ledger/SKILL.zh-CN.md ~/.claude/skills/time-ledger/SKILL.md
 
 - **直接报**: 随口说做了啥 → AI 解析写入,拿不准的批量问你。
 - **批量整理**: 说"整理时间账本" → AI 把"待确认"的行捞出来一次性问清、补齐。
-- **看分布**: Notion 自带日历视图 + 按活动 group 汇总;或让 Claude 现场画一张图。
+- **看分布**: Notion 自带日历视图 + 按活动 group 汇总;或让 AI 现场画一张图。
+
+**和你的 AI 一起复盘 —— 没有固定看板。** 问一句"我这周时间复利了吗?",它当场生成图:条形、复利甜甜圈、打卡热力图、reading:building 比例 —— 你要什么它画什么。
+
+![和 AI 一起复盘这周:条形图、62% 复利甜甜圈、reading:building 洞察,还有「打卡热力图」「周二去哪了」这类示例问法](./assets/time-review.png)
 
 ## 诚实的局限
 

@@ -82,7 +82,11 @@ cp time-ledger/SKILL.md ~/.claude/skills/time-ledger/SKILL.md
 
 - **Just report**: say what you did → the AI parses and writes it, batch-asking on anything uncertain.
 - **Batch reconcile**: say *"tidy up my time ledger"* → the AI pulls every `待确认` (to-confirm) row and asks you in one message, then fills them in.
-- **See the breakdown**: Notion's built-in calendar view + group-by-activity sum; or ask Claude to draw a chart on the spot.
+- **See the breakdown**: Notion's built-in calendar view + group-by-activity sum; or ask your AI to draw a chart on the spot.
+
+**Review it with your AI — no fixed dashboard.** Ask *"how did my week go — am I compounding?"* and it generates the view live: bars, a compounding donut, a streak heatmap, a reading-vs-building ratio — whatever you ask for.
+
+![Reviewing your week with your AI: weekly bars, a 62% compounding donut, a reading:building insight, plus example asks like "a streak heatmap" and "where did Tuesday go?"](./assets/time-review.png)
 
 ## Honest limitations
 
