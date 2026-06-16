@@ -60,6 +60,10 @@ AI:   记好 3 条 ✅
 </tr>
 </table>
 
+**Claude.ai —— 点哪里**(网页栏那三步,红框标好了):
+
+![在 Claude.ai 上装 time-ledger skill:点 +、选 Write skill instructions、从 SKILL.md 粘贴](./assets/skill-guide.png)
+
 **Claude Code 命令**(中文版用 `SKILL.zh-CN.md`):
 
 ```bash
