@@ -100,22 +100,22 @@ export const SkillGuide: React.FC = () => {
             <span style={{fontSize: 13, color: GPT, background: '#E3F2EC', padding: '2px 9px', borderRadius: 999}}>🔒 needs Plus</span>
           </div>
 
-          <Step n={1}><B>New Custom GPT</B> — ChatGPT → Create a GPT</Step>
+          <Step n={1}><B>New Project</B> — ChatGPT → Projects → New project</Step>
           <div style={{display: 'flex', gap: 13, marginBottom: 18}}>
             <N n={2} c={GPT} bg="#E3F2EC" />
             <div style={{flex: 1}}>
-              <Cap>Paste <Mono>SKILL.md</Mono> into <B>Instructions</B></Cap>
+              <Cap>Paste <Mono>SKILL.md</Mono> into the project's <B>Instructions</B></Cap>
               <div style={{position: 'relative', marginTop: 8, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: '13px 15px'}}>
                 <F label="Instructions" value="paste the skill here" tall />
                 <RedBox style={{left: 9, top: 9, right: 9, bottom: 9, borderRadius: 9}} />
               </div>
             </div>
           </div>
-          <Step n={3}><B>Connect Notion</B> — Settings → Connectors → Notion, grant your DB</Step>
-          <Step n={4} last>Say <i>“log it: read papers 2h.”</i></Step>
+          <Step n={3}><B>Connect Notion</B> — add the Notion connector, grant your DB</Step>
+          <Step n={4} last>Chat in the project: <i>“log it: read papers 2h.”</i></Step>
 
           <div style={{marginTop: 18, marginLeft: 43, fontSize: 13.5, color: MUTED, lineHeight: 1.5, fontStyle: 'italic'}}>
-            Flow shown, not screenshot-verified — the GPT editor is a paid feature.
+            Same idea as Claude — a connector + instructions, just inside a Project.
           </div>
         </div>
       </div>
