@@ -54,6 +54,8 @@ Then pick your form — both do the same thing, just a different surface:
 3. **Settings → Connectors → Notion** — grant access to your `time-ledger` database.
 4. Just say *"log it: read papers 2h today."*
 
+*Also works in **ChatGPT** (paid) — connect the Notion connector and paste these instructions into a Custom GPT. No skill upload, so a touch more setup.*
+
 </td>
 </tr>
 </table>
@@ -81,7 +83,6 @@ cp time-ledger/SKILL.md ~/.claude/skills/time-ledger/SKILL.md
 - You have to actually report — it doesn't auto-track (on purpose; a tracker doesn't know *why* you spent the time).
 - The `compounding / consuming / neutral` tags are hand-rules today, not learned — a real engine is roadmap, not repo.
 - n=1: used solo for a handful of days, no real validation.
-- No fast ChatGPT path yet — ChatGPT has no custom-skill primitive like Claude's, so there's no drop-in (a Custom GPT works, but it's a rebuild). Hoping OpenAI ships customizable skills soon.
 
 ## Design philosophy
 

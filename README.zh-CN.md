@@ -54,6 +54,8 @@ AI:   记好 3 条 ✅
 3. **Settings → Connectors → Notion** —— 把你的「时间账本」库授权给它。
 4. 直接说"记一下:今天看了俩小时论文"。
 
+*ChatGPT 也能用(需付费)—— 连上 Notion 连接器,把这些指令粘进一个 Custom GPT。没有 skill 上传,所以多几步。*
+
 </td>
 </tr>
 </table>
@@ -81,7 +83,6 @@ cp time-ledger/SKILL.zh-CN.md ~/.claude/skills/time-ledger/SKILL.md
 - 得你主动报 —— 它不自动追踪(有意的;追踪器不懂你"为什么"花这时间)。
 - `复利 / 消耗 / 中性` 现在是手动规则,不是学出来的 —— 真正的引擎是 roadmap,不是现状。
 - n=1:作者一个人用了几天,没大样本验证。
-- 暂时没有快速接入 ChatGPT 的办法 —— 它还不像 Claude 那样支持自定义 skill,没有现成接法(Custom GPT 能做,但得重搭)。希望 OpenAI 早点支持自定义 skill。
 
 ## 设计哲学
 
