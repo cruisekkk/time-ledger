@@ -22,7 +22,7 @@ So you just say what you did, and the LLM does the grunt work — categorize it,
 
 ## What it is
 
-A **Claude skill** (a single `SKILL.md` of instructions) + your own **Notion database**. No server, no backend to deploy. Capture anywhere you have Claude (phone / laptop / chat); the source of truth lives in your Notion (cloud, phone-native).
+A **Claude skill** (a single `SKILL.md` of instructions) + your own **Notion database**. No server, no backend to deploy. Capture anywhere you have **Claude or ChatGPT** (phone / laptop / chat); your Notion is the source of truth (cloud, phone-native). **Heads up:** the skill / connector setup currently runs only on the **paid** tiers of Claude and ChatGPT.
 
 ## Install
 
