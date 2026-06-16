@@ -5,6 +5,7 @@ const BG = '#F5F4EE';
 const INK = '#2A2A27';
 const MUTED = '#76746C';
 const CORAL = '#D97757';
+const GPT = '#0A8A6F';
 const RED = '#E5484D';
 const CARD = '#FFFFFF';
 const BORDER = 'rgba(0,0,0,0.10)';
@@ -13,71 +14,108 @@ const HI_INK = '#9B4A2E';
 const MONO = '"SF Mono", Menlo, monospace';
 const FONT = 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif';
 
-const Spark: React.FC<{size: number}> = ({size}) => (
+const Spark: React.FC<{size: number; color?: string}> = ({size, color = CORAL}) => (
   <svg width={size} height={size} viewBox="0 0 100 100" style={{display: 'block'}}>
     {Array.from({length: 12}).map((_, i) => {
       const a = (i * 30 * Math.PI) / 180;
-      return <line key={i} x1={50 + Math.cos(a) * 15} y1={50 + Math.sin(a) * 15} x2={50 + Math.cos(a) * 47} y2={50 + Math.sin(a) * 47} stroke={CORAL} strokeWidth={7} strokeLinecap="round" />;
+      return <line key={i} x1={50 + Math.cos(a) * 15} y1={50 + Math.sin(a) * 15} x2={50 + Math.cos(a) * 47} y2={50 + Math.sin(a) * 47} stroke={color} strokeWidth={7} strokeLinecap="round" />;
     })}
   </svg>
 );
 
 const RedBox: React.FC<{style: React.CSSProperties}> = ({style}) => (
-  <div style={{position: 'absolute', border: `3px solid ${RED}`, borderRadius: 9, boxShadow: `0 0 0 3px rgba(229,72,77,0.22)`, ...style}} />
+  <div style={{position: 'absolute', border: `3px solid ${RED}`, borderRadius: 8, boxShadow: `0 0 0 3px rgba(229,72,77,0.20)`, ...style}} />
 );
 
-const StepNum: React.FC<{n: number}> = ({n}) => (
-  <div style={{flex: 'none', width: 38, height: 38, borderRadius: 999, background: HI, color: HI_INK, fontSize: 20, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{n}</div>
+const N: React.FC<{n: number; c?: string; bg?: string}> = ({n, c = HI_INK, bg = HI}) => (
+  <div style={{flex: 'none', width: 30, height: 30, borderRadius: 999, background: bg, color: c, fontSize: 16, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{n}</div>
 );
+
+const Cap: React.FC<{children: React.ReactNode}> = ({children}) => (
+  <div style={{fontSize: 17, color: INK, lineHeight: 1.45}}>{children}</div>
+);
+
+const B: React.FC<{children: React.ReactNode}> = ({children}) => <b style={{fontWeight: 600}}>{children}</b>;
+const Mono: React.FC<{children: React.ReactNode}> = ({children}) => <span style={{fontFamily: MONO, fontSize: 14, background: '#ECEAE0', padding: '1px 6px', borderRadius: 5}}>{children}</span>;
 
 export const SkillGuide: React.FC = () => {
   return (
-    <AbsoluteFill style={{backgroundColor: BG, fontFamily: FONT, padding: '40px 48px'}}>
-      <div style={{display: 'flex', alignItems: 'center', gap: 11, marginBottom: 30}}>
-        <Spark size={26} />
-        <div style={{fontSize: 27, fontWeight: 600, color: INK}}>Load the skill on Claude.ai</div>
+    <AbsoluteFill style={{backgroundColor: BG, fontFamily: FONT, padding: '36px 44px'}}>
+      <div style={{display: 'flex', alignItems: 'center', gap: 10, marginBottom: 26}}>
+        <Spark size={24} />
+        <div style={{fontSize: 25, fontWeight: 600, color: INK}}>Where to click</div>
       </div>
 
-      {/* Step 1 */}
-      <div style={{display: 'flex', gap: 18, marginBottom: 26, alignItems: 'flex-start'}}>
-        <StepNum n={1} />
+      <div style={{display: 'flex', gap: 44}}>
+        {/* ---------- Claude.ai ---------- */}
         <div style={{flex: 1}}>
-          <div style={{fontSize: 21, color: INK, marginBottom: 12}}>Open <b style={{fontWeight: 600}}>Customize → Skills</b>, click the <b style={{fontWeight: 600}}>+</b>.</div>
-          <div style={{position: 'relative', background: CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-            <div style={{fontSize: 21, fontWeight: 600, color: INK}}>Skills</div>
-            <div style={{display: 'flex', alignItems: 'center', gap: 18, color: MUTED, fontSize: 22}}>
-              <span>⌕</span>
-              <span style={{position: 'relative', width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26, lineHeight: 1}}>+</span>
+          <div style={{display: 'flex', alignItems: 'center', gap: 8, marginBottom: 18}}>
+            <Spark size={18} />
+            <div style={{fontSize: 19, fontWeight: 600, color: INK}}>Claude.ai</div>
+          </div>
+
+          <div style={{display: 'flex', gap: 13, marginBottom: 18}}>
+            <N n={1} />
+            <div style={{flex: 1}}>
+              <Cap><B>Skills</B> → click the <B>+</B></Cap>
+              <div style={{position: 'relative', marginTop: 8, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: '12px 15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <span style={{fontSize: 17, fontWeight: 600, color: INK}}>Skills</span>
+                <span style={{fontSize: 22, color: MUTED, lineHeight: 1}}>+</span>
+                <RedBox style={{right: 11, top: 8, width: 30, height: 30}} />
+              </div>
             </div>
-            <RedBox style={{right: 16, top: 11, width: 36, height: 36}} />
+          </div>
+
+          <div style={{display: 'flex', gap: 13, marginBottom: 18}}>
+            <N n={2} />
+            <div style={{flex: 1}}>
+              <Cap>Create skill → <B>Write skill instructions</B></Cap>
+              <div style={{position: 'relative', marginTop: 8, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: 6, boxShadow: '0 5px 18px rgba(0,0,0,0.07)'}}>
+                {['Create with Claude', 'Write skill instructions', 'Upload a skill'].map((t, i) => (
+                  <div key={i} style={{fontSize: 16, color: i === 1 ? HI_INK : INK, padding: '9px 11px', borderRadius: 7, background: i === 1 ? HI : 'transparent'}}>{t}</div>
+                ))}
+                <RedBox style={{left: 4, top: 40, right: 4, height: 36}} />
+              </div>
+            </div>
+          </div>
+
+          <div style={{display: 'flex', gap: 13}}>
+            <N n={3} />
+            <div style={{flex: 1}}>
+              <Cap>Paste from <Mono>SKILL.md</Mono>, click Create</Cap>
+              <div style={{position: 'relative', marginTop: 8, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: '13px 15px'}}>
+                <F label="Skill name" value="time-ledger" mono />
+                <F label="Description" value="the description: line" />
+                <F label="Instructions" value="everything below the ---" tall />
+                <RedBox style={{left: 9, top: 9, right: 9, bottom: 9, borderRadius: 9}} />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Step 2 */}
-      <div style={{display: 'flex', gap: 18, marginBottom: 26, alignItems: 'flex-start'}}>
-        <StepNum n={2} />
+        {/* ---------- ChatGPT ---------- */}
         <div style={{flex: 1}}>
-          <div style={{fontSize: 21, color: INK, marginBottom: 12}}><b style={{fontWeight: 600}}>Create skill</b> → <b style={{fontWeight: 600}}>Write skill instructions</b>.</div>
-          <div style={{position: 'relative', background: CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: '8px', width: 360, boxShadow: '0 6px 24px rgba(0,0,0,0.08)'}}>
-            {['Create with Claude', 'Write skill instructions', 'Upload a skill'].map((t, i) => (
-              <div key={i} style={{fontSize: 19, color: i === 1 ? HI_INK : INK, padding: '11px 14px', borderRadius: 8, background: i === 1 ? HI : 'transparent'}}>{t}</div>
-            ))}
-            <RedBox style={{left: 6, top: 50, width: 348, height: 42}} />
+          <div style={{display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18}}>
+            <div style={{fontSize: 19, fontWeight: 600, color: INK}}>ChatGPT</div>
+            <span style={{fontSize: 13, color: GPT, background: '#E3F2EC', padding: '2px 9px', borderRadius: 999}}>🔒 needs Plus</span>
           </div>
-        </div>
-      </div>
 
-      {/* Step 3 */}
-      <div style={{display: 'flex', gap: 18, alignItems: 'flex-start'}}>
-        <StepNum n={3} />
-        <div style={{flex: 1}}>
-          <div style={{fontSize: 21, color: INK, marginBottom: 12}}>Paste from <span style={{fontFamily: MONO, fontSize: 18, background: '#ECEAE0', padding: '2px 7px', borderRadius: 5}}>SKILL.md</span> — and click Create.</div>
-          <div style={{position: 'relative', background: CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: '18px 20px'}}>
-            <Field label="Skill name" value="time-ledger" mono />
-            <Field label="Description" value="the description: line" />
-            <Field label="Instructions" value="everything below the ---" tall />
-            <RedBox style={{left: 12, top: 12, right: 12, bottom: 12, borderRadius: 10}} />
+          <Step n={1}><B>New Custom GPT</B> — ChatGPT → Create a GPT</Step>
+          <div style={{display: 'flex', gap: 13, marginBottom: 18}}>
+            <N n={2} c={GPT} bg="#E3F2EC" />
+            <div style={{flex: 1}}>
+              <Cap>Paste <Mono>SKILL.md</Mono> into <B>Instructions</B></Cap>
+              <div style={{position: 'relative', marginTop: 8, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: '13px 15px'}}>
+                <F label="Instructions" value="paste the skill here" tall />
+                <RedBox style={{left: 9, top: 9, right: 9, bottom: 9, borderRadius: 9}} />
+              </div>
+            </div>
+          </div>
+          <Step n={3}><B>Connect Notion</B> — Settings → Connectors → Notion, grant your DB</Step>
+          <Step n={4} last>Say <i>“log it: read papers 2h.”</i></Step>
+
+          <div style={{marginTop: 18, marginLeft: 43, fontSize: 13.5, color: MUTED, lineHeight: 1.5, fontStyle: 'italic'}}>
+            Flow shown, not screenshot-verified — the GPT editor is a paid feature.
           </div>
         </div>
       </div>
@@ -85,9 +123,16 @@ export const SkillGuide: React.FC = () => {
   );
 };
 
-const Field: React.FC<{label: string; value: string; mono?: boolean; tall?: boolean}> = ({label, value, mono, tall}) => (
-  <div style={{marginBottom: 12}}>
-    <div style={{fontSize: 15, color: MUTED, marginBottom: 5}}>{label}</div>
-    <div style={{border: `1px solid ${BORDER}`, borderRadius: 8, padding: tall ? '12px 14px 34px' : '12px 14px', fontSize: 18, color: mono ? INK : MUTED, fontFamily: mono ? MONO : FONT, background: '#FCFBF8'}}>{value}</div>
+const Step: React.FC<{n: number; children: React.ReactNode; last?: boolean}> = ({n, children, last}) => (
+  <div style={{display: 'flex', gap: 13, marginBottom: last ? 0 : 18, alignItems: 'flex-start'}}>
+    <N n={n} c={GPT} bg="#E3F2EC" />
+    <div style={{flex: 1, paddingTop: 3}}><Cap>{children}</Cap></div>
+  </div>
+);
+
+const F: React.FC<{label: string; value: string; mono?: boolean; tall?: boolean}> = ({label, value, mono, tall}) => (
+  <div style={{marginBottom: 10}}>
+    <div style={{fontSize: 13, color: MUTED, marginBottom: 4}}>{label}</div>
+    <div style={{border: `1px solid ${BORDER}`, borderRadius: 7, padding: tall ? '10px 12px 26px' : '10px 12px', fontSize: 15, color: mono ? INK : MUTED, fontFamily: mono ? MONO : FONT, background: '#FCFBF8'}}>{value}</div>
   </div>
 );

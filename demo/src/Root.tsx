@@ -7,7 +7,7 @@ import {SkillGuide} from './SkillGuide';
 export const RemotionRoot: React.FC = () => {
   return (
     <>
-      <Composition id="SkillGuide" component={SkillGuide} durationInFrames={1} fps={30} width={940} height={812} />
+      <Composition id="SkillGuide" component={SkillGuide} durationInFrames={1} fps={30} width={1160} height={742} />
       <Composition
         id="TimeLedgerDemo"
         component={TimeLedgerDemo}

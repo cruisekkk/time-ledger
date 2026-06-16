@@ -60,9 +60,9 @@ Then pick your form — both do the same thing, just a different surface:
 </tr>
 </table>
 
-**Claude.ai — where to click** (the three steps from the web column, red-boxed):
+**Where to click — Claude.ai & ChatGPT** (each step red-boxed; the ChatGPT side needs a paid plan):
 
-![Loading the time-ledger skill on Claude.ai: click the +, choose Write skill instructions, paste from SKILL.md](./assets/skill-guide.png)
+![Where to click to set up time-ledger on Claude.ai and ChatGPT — each step red-boxed](./assets/skill-guide.png)
 
 **Claude Code commands** (中文 → swap `SKILL.md` for `SKILL.zh-CN.md`):
 
