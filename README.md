@@ -18,7 +18,9 @@ AI:   Logged 3 entries ✅
 
 I'm lazy — I won't keep a form going — but I do want to know where my time goes: am I wasting it, or compounding it?
 
-So you just say what you did, and the LLM does the grunt work — categorize it, estimate the duration, write the row. Its one rule: **when it's unsure (how long? which day? is "2h + 1h" three hours, or two?), it asks instead of guessing.** A log that quietly invents facts is worse than no log at all.
+Here's what actually changed for me: I'm already in an AI chat for hours a day. So logging isn't a new habit to build — it's one more sentence in a conversation I'm already having. **Zero friction, because it rides a habit I already have** — which is exactly why it sticks where timers and forms die in three days.
+
+And the point isn't the log — it's **compounding**. Once you can see where the hours actually go, you can steer them toward the work that builds on itself. The skill does the grunt work (categorize, estimate, write the row), and when it's unsure it asks instead of guessing — a log that quietly invents facts is worse than none.
 
 ## What it is
 
