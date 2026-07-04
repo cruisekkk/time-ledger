@@ -52,6 +52,7 @@ Only tag the **obvious** ones; leave uncertain ones blank:
 
 - ❌ Don't fabricate when duration / category / date is uncertain → mark To-confirm + write the question in Notes + batch-ask
 - ❌ Don't write a bare `Date`; use `date:Date:start`
+- ✅ Known Notion MCP bug ([notion-mcp-server#121](https://github.com/makenotion/notion-mcp-server/issues/121)): `create-pages` can silently drop expanded date fields — after the session's first write, read the row back; if `Date` is empty, fill it with `update-page`
 - ❌ Don't invent select values; copy the enum
 - ❌ Don't ask one at a time; batch into one message
 - ✅ Give a short receipt after logging (how many rows, which are To-confirm, what the question is)

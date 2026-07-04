@@ -52,6 +52,7 @@ description: 自然语言记时间 — 用户随口说做了啥,你解析成「�
 
 - ❌ 时长/分类/日期拿不准时不瞎填 → 标待确认 + 备注写疑问 + 批量问
 - ❌ date 字段别写单值 `时间`，用 `date:时间:start`
+- ✅ 已知 Notion MCP bug（[notion-mcp-server#121](https://github.com/makenotion/notion-mcp-server/issues/121)）: `create-pages` 可能静默丢掉展开后的日期字段——每次会话第一笔写入后回读一下，`时间` 为空就用 `update-page` 补上
 - ❌ select 值别自创，照抄枚举
 - ❌ 别一条条追问,攒成一条批量问
 - ✅ 报完给个简短回执（记了几条、哪条待确认、问题是什么）
