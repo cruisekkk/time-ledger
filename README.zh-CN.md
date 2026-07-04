@@ -2,6 +2,8 @@
 
 [English](README.md) | **简体中文**
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![Works with: Claude Code · Claude.ai · ChatGPT](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Claude.ai%20·%20ChatGPT-d97757)](#安装) [![Notion 模板](https://img.shields.io/badge/Notion%20模板-中文%20·%20EN-black?logo=notion)](https://spiral-jump-106.notion.site/c7e8fde1248f4b4a9b204ccca99c153f)
+
 **用一句话记时间。** 你随口说"今天看了俩小时论文、撸铁一小时",一个 AI 把它解析成结构化的活动 / 时长 / 日期,写进你自己的 Notion 库。**拿不准就反过来问你——绝不瞎编。**
 
 不是计时器,不是表格。是一面照"你的时间有没有在复利"的镜子。
@@ -25,6 +27,8 @@ AI:   记好 3 条 ✅
 ## 这是什么形态
 
 它是一个 **Claude Skill**(就是一份 `SKILL.md` 指令)+ 一个你自己的 **Notion database**。没有服务器、没有要部署的后端。在任何有 **Claude 或 ChatGPT** 的地方都能记(手机/电脑/对话),数据真相源在你的 Notion(云端、手机原生可看)。**注意:** skill / 连接器目前只能在这两者的**付费版**里用。
+
+姊妹项目: [trading-ledger](https://github.com/cruisekkk/trading-ledger) —— 同一套方法(Notion 当真相源 + skill 解析自然语言 + 拿不准就问不瞎猜),用在交易上:逼你在入场那一刻把理由说出口。
 
 ## 安装
 
@@ -92,7 +96,7 @@ cp time-ledger/SKILL.zh-CN.md ~/.claude/skills/time-ledger/SKILL.md
 
 - 得你主动报 —— 它不自动追踪(有意的;追踪器不懂你"为什么"花这时间)。
 - `复利 / 消耗 / 中性` 现在是手动规则,不是学出来的 —— 真正的引擎是 roadmap,不是现状。
-- n=1:作者一个人用了几天,没大样本验证。
+- n=1:作者自己从 2026 年 6 月起每天在用——但样本量仍然是 1。
 
 ## 设计哲学
 
@@ -101,3 +105,7 @@ cp time-ledger/SKILL.zh-CN.md ~/.claude/skills/time-ledger/SKILL.md
 ## License
 
 MIT — 见 [LICENSE](./LICENSE)。拿去改、拿去用、拿去发你自己的版本。
+
+---
+
+*如果 time-ledger 对你有用,点个 ⭐ 能让更多人看到它。Bug、想法、"它猜错了"的故事 → [反馈楼](https://github.com/cruisekkk/time-ledger/issues/1)。*

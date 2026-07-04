@@ -2,6 +2,8 @@
 
 **English** | [简体中文](README.zh-CN.md)
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE) [![Works with: Claude Code · Claude.ai · ChatGPT](https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Claude.ai%20·%20ChatGPT-d97757)](#install) [![Notion template](https://img.shields.io/badge/Notion%20template-EN%20·%20中文-black?logo=notion)](https://spiral-jump-106.notion.site/0d3d3d13164241f595aa50679c6c42d8)
+
 **Track your time in one sentence.** You say what you did in plain language — *"read ML papers for two hours, hit the gym for one, did a LeetCode problem"* — and an AI parses it into structured activity / minutes / date and writes it to your own Notion database. **When it isn't sure, it asks you back instead of guessing.**
 
 Not a timer. Not a form. A mirror for whether your hours are actually compounding.
@@ -25,6 +27,8 @@ And the point isn't the log — it's **compounding**. Once you can see where the
 ## What it is
 
 A **Claude skill** (a single `SKILL.md` of instructions) + your own **Notion database**. No server, no backend to deploy. Capture anywhere you have **Claude or ChatGPT** (phone / laptop / chat); your Notion is the source of truth (cloud, phone-native). **Heads up:** the skill / connector setup currently runs only on the **paid** tiers of Claude and ChatGPT.
+
+Sister project: [trading-ledger](https://github.com/cruisekkk/trading-ledger) — the same method (your own Notion as source of truth + a skill that parses plain language + asks instead of guessing), applied to your trades: it makes you state your *reason* at the moment of entry.
 
 ## Install
 
@@ -92,7 +96,7 @@ cp time-ledger/SKILL.md ~/.claude/skills/time-ledger/SKILL.md
 
 - You have to actually report — it doesn't auto-track (on purpose; a tracker doesn't know *why* you spent the time).
 - The `compounding / consuming / neutral` tags are hand-rules today, not learned — a real engine is roadmap, not repo.
-- n=1: used solo for a handful of days, no real validation.
+- n=1: the author's daily driver since June 2026 — but still a sample size of one.
 
 ## Design philosophy
 
@@ -101,3 +105,7 @@ From a larger personal project (inveself), one line: **"You have to become a com
 ## License
 
 MIT — see [LICENSE](./LICENSE). Fork it, use it, ship your own version.
+
+---
+
+*If time-ledger is useful, a ⭐ helps more people find it. Bugs, ideas, "it guessed wrong" stories → [the feedback thread](https://github.com/cruisekkk/time-ledger/issues/1).*
